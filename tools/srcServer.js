@@ -1,5 +1,7 @@
 import express from 'express';
 import webpack from 'webpack';
+import middleware_dev from 'webpack-dev-middleware';
+import middleware_hot from 'webpack-hot-middleware';
 import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
@@ -10,12 +12,12 @@ const port = 3000;
 const app = express();
 const compiler = webpack(config);
 
-app.use(require('webpack-dev-middleware')(compiler, {
+app.use(middleware_dev(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
 }));
 
-app.use(require('webpack-hot-middleware')(compiler));
+app.use(middleware_hot(compiler));
 
 app.get('*', function(req, res) {
   res.sendFile(path.join( __dirname, '../src/index.html'));
