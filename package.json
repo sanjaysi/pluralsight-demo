@@ -9,7 +9,7 @@
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\"",
-    "test:watch": "npm run test -- --watch"    
+    "test:watch": "npm run test -- --watch"
   },
   "author": "Sanjay Singh (credit Cory)",
   "license": "MIT",
@@ -49,6 +49,7 @@
     "express": "4.13.4",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
+    "html-loader": "^0.4.3",
     "jsdom": "8.5.0",
     "mocha": "2.4.5",
     "nock": "8.0.0",
