@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import Header from './common/Header';
-import Webcli from './common/webcli';
+import WebCLI from './webcli/WebCLI';
 
 class App extends Component {
     render() {
@@ -10,7 +10,7 @@ class App extends Component {
                     <Header />
                     {this.props.children}
                 </div>
-                <Webcli />
+                <WebCLI />
             </div>
         );
     }
