@@ -3,13 +3,14 @@ import '../../styles/webcli.css';
 
 let style_input = {display: 'block'};
 
-const TextInputCLI = () => {
+const TextInputCLI = ({onClick}) => {
 	return (
-		<input 
+		<input  
 			className="webcli-input" 
 			spellCheck="false" 
 			placeholder="_"
-			onChange={() => console.log('Hi')}
+			onChange={console.log(10)}
+            onClick={onClick}
 			style={style_input}>
 		</input>
 	);
