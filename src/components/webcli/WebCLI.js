@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 import TextInputCLI from  './TextInputCLI';
+import WebCLIOutput from './WebCLIOutput';
+import WebCLIBusy from './WebCLIBusy';
 import '../../styles/webcli.css';
 
 const style_none = {display: 'none'};
@@ -69,27 +71,12 @@ class WebCLI extends React.Component {
 		//console.log('handleOnClick');
 	}
 
-	_webcli_output() {
-		return (
-			<div className="webcli-output">
-				<span className="webcli-cmd">Web CLI [Version 0.0.1]</span>
-				<br /><br />
-			</div>
-		);
-	}
-
-	_webcli_busy() {
-		return (
-			<div className="webcli-busy" style={style_none}></div>
-		);		
-	}
-
     render() {
 		return(
 			<div className="webcli" style={this.state.consolestatus}>
-				{this._webcli_output()}
+				<WebCLIOutput />
 				<TextInputCLI onClick={this.handleOnClick} />
-				{this._webcli_busy()}
+				<WebCLIBusy />
 			</div>		
 		);
     }
