@@ -5,7 +5,7 @@ let style_input = {display: 'block'};
 
 const TextInputCLI = ({onClick}) => {
 	return (
-		<input  
+		<input    
 			className="webcli-input" 
 			spellCheck="false" 
 			placeholder="_"

@@ -4,14 +4,12 @@ import WebCLIOutput from './WebCLIOutput';
 import WebCLIBusy from './WebCLIBusy';
 import '../../styles/webcli.css';
 
-const style_none = {display: 'none'};
-
 class WebCLI extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			consolestatus :  style_none,
+			showconsole: false,
 			history: [],
 			cmdoffset: 0,
 			output: '_'
@@ -53,11 +51,8 @@ class WebCLI extends React.Component {
 			}
 		} else {
 		if (e.ctrlKey && e.keyCode == 192) {
-			if (this.state.consolestatus == null) {
-				this.setState({consolestatus: style_none});
-				} else {
-					this.setState({consolestatus: null });
-				}
+			let newstate = !this.state.showconsole;
+			this.setState({showconsole: newstate});
 			}
 		}
 	}
@@ -75,8 +70,10 @@ class WebCLI extends React.Component {
 	}
 
     render() {
+    	const display_none = {display: 'none'};
+
 		return(
-			<div className="webcli" style={this.state.consolestatus}>
+			<div className="webcli" style={this.state.showconsole ? null : display_none}>
 				<WebCLIOutput />
 				<TextInputCLI onClick={this.handleOnClick} />
 				<WebCLIBusy message={this.state.output}/>
