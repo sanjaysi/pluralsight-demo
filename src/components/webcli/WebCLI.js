@@ -13,7 +13,8 @@ class WebCLI extends React.Component {
 		this.state = {
 			consolestatus :  style_none,
 			history: [],
-			cmdoffset: 0
+			cmdoffset: 0,
+			output: '_'
 		};
 		this.handleShortcut = this.handleShortcut.bind(this);
 		this.handleOnClick = this.handleOnClick.bind(this);
@@ -63,7 +64,9 @@ class WebCLI extends React.Component {
 
 	runCmd(e) {
 		if (e.target.value.trim() == "CMD") {
-			console.log("Command: CMD");
+			this.setState({output: 'Hello CMD'});
+		} else {
+			this.setState({output: 'Invalid Command'});
 		}
 	}
 
@@ -76,7 +79,7 @@ class WebCLI extends React.Component {
 			<div className="webcli" style={this.state.consolestatus}>
 				<WebCLIOutput />
 				<TextInputCLI onClick={this.handleOnClick} />
-				<WebCLIBusy />
+				<WebCLIBusy message={this.state.output}/>
 			</div>		
 		);
     }
