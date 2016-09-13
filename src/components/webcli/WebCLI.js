@@ -10,6 +10,10 @@ class WebCLI extends React.Component {
 
 		this.state = {
 			showconsole: false,
+			showimage: false,
+			imageUrl: '',
+			showvideo: false,
+			videoUrl: '',
 			history: [],
 			cmdoffset: 0,
 			output: '_'
@@ -27,7 +31,7 @@ class WebCLI extends React.Component {
 			let newState = this.state.history.slice();
 			newState.push(e.target.value);
 			this.setState({history: newState});
-			this.runCmd(e);
+			this.runCmd(e.target.value.trim());
 			e.target.value = "";
 		} else if (e.keyCode == 38) {
 			let cmdoffset = this.state.cmdoffset;
@@ -57,11 +61,31 @@ class WebCLI extends React.Component {
 		}
 	}
 
-	runCmd(e) {
-		if (e.target.value.trim() == "CMD") {
-			this.setState({output: 'Hello CMD'});
-		} else {
-			this.setState({output: 'Invalid Command'});
+	runCmd(command) {
+		// clear output
+		this.setState({showimage: false});
+		this.setState({videoUrl: false});
+		this.setState({output: ''});
+		
+		if (command == "") {return;}
+
+		let tokens = command.split(" ");
+		let	cmd = tokens[0].toUpperCase();
+
+		if(cmd === "ECHO") { 
+			tokens.shift();
+			let str = tokens.join(' ');
+			this.setState({output: str});
+		}
+		if(cmd === "CLS") { this.setState({output: ''});}
+		if(cmd === "IMG") { 
+			this.setState({showimage: true});
+			this.setState({imageUrl: tokens[1]});
+		}
+		if(cmd === "VDO") { 
+			this.setState({showvideo: true});
+			this.setState({videoUrl: tokens[1]});
+			console.log('vdo: ', this.state.videoUrl);
 		}
 	}
 
@@ -76,7 +100,9 @@ class WebCLI extends React.Component {
 			<div className="webcli" style={this.state.showconsole ? null : display_none}>
 				<WebCLIOutput />
 				<TextInputCLI onClick={this.handleOnClick} />
-				<WebCLIBusy message={this.state.output}/>
+				<WebCLIBusy message={this.state.output}
+							image={this.state.showimage ? this.state.imageUrl : null} 
+							video={this.state.showvideo ? this.state.videoUrl : null} />
 			</div>		
 		);
     }
