@@ -85,7 +85,6 @@ class WebCLI extends React.Component {
 		if(cmd === "VDO") { 
 			this.setState({showvideo: true});
 			this.setState({videoUrl: tokens[1]});
-			console.log('vdo: ', this.state.videoUrl);
 		}
 	}
 
@@ -101,8 +100,8 @@ class WebCLI extends React.Component {
 				<WebCLIOutput />
 				<TextInputCLI onClick={this.handleOnClick} />
 				<WebCLIBusy message={this.state.output}
-							image={this.state.showimage ? this.state.imageUrl : null} 
-							video={this.state.showvideo ? this.state.videoUrl : null} />
+							imageUrl={this.state.showimage ? this.state.imageUrl : null} 
+							videoUrl={this.state.showvideo ? this.state.videoUrl : null} />
 			</div>		
 		);
     }

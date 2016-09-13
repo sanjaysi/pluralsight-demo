@@ -9,7 +9,6 @@ const TextInputCLI = ({onClick}) => {
 			className="webcli-input" 
 			spellCheck="false" 
 			placeholder="_"
-			onChange={console.log(10)}
             onClick={onClick}
 			style={style_input}>
 		</input>

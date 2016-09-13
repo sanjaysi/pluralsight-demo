@@ -19,7 +19,11 @@ app.use(middleware_dev(compiler, {
 
 app.use(middleware_hot(compiler));
 
-app.get('*', function(req, res) {
+// We point to our static assets
+let assetPath = path.join( __dirname, '../assets');
+app.use("/assets", express.static(assetPath));
+
+app.get('/', function(req, res) {
   res.sendFile(path.join( __dirname, '../src/index.html'));
 });
 
