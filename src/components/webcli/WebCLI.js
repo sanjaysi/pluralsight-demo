@@ -93,7 +93,7 @@ class WebCLI extends React.Component {
 	}
 
     render() {
-    	const display_none = {display: 'none'};
+		const display_none = {display: 'none'};
 
 		return(
 			<div className="webcli" style={this.state.showconsole ? null : display_none}>
