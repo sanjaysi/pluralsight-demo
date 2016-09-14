@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import TextInputCLI from  './TextInputCLI';
 import WebCLIOutput from './WebCLIOutput';
 import WebCLIBusy from './WebCLIBusy';
+import {courses} from './courseData';
+import Console from './actions';
 import '../../styles/webcli.css';
 
 class WebCLI extends React.Component {
@@ -11,9 +13,9 @@ class WebCLI extends React.Component {
 		this.state = {
 			showconsole: false,
 			showimage: false,
-			imageUrl: '',
+			imageUrl: null,
 			showvideo: false,
-			videoUrl: '',
+			videoUrl: null,
 			history: [],
 			cmdoffset: 0,
 			output: '_'
@@ -61,29 +63,20 @@ class WebCLI extends React.Component {
 	}
 
 	runCmd(command) {
-		// clear output
-		this.setState({showimage: false});
-		this.setState({videoUrl: false});
-		this.setState({output: ''});
-		
+		Console._cls(this);
+
 		if (command == "") {return;}
 
 		let tokens = command.split(" ");
 		let	cmd = tokens[0].toUpperCase();
 
-		if(cmd === "ECHO") { 
-			tokens.shift();
-			let str = tokens.join(' ');
-			this.setState({output: str});
-		}
-		if(cmd === "CLS") { this.setState({output: ''});}
-		if(cmd === "IMG") { 
-			this.setState({showimage: true});
-			this.setState({imageUrl: tokens[1]});
-		}
-		if(cmd === "VDO") { 
-			this.setState({showvideo: true});
-			this.setState({videoUrl: tokens[1]});
+		switch (cmd) {
+			case 'ECHO': { Console._echo(this, tokens); return; }
+			case 'CLS': { Console._cls(this); return; }
+			case 'IMG': { Console._img(this, tokens[1]); return; }
+			case 'VDO': { Console._vdo(this, tokens[1]); return; }
+			case 'CRS': { Console._crs(this, courses); return; }
+			default: { Console._invalid(this); return; }
 		}
 	}
 
