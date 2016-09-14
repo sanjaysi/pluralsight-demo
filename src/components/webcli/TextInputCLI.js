@@ -3,7 +3,7 @@ import '../../styles/webcli.css';
 
 let style_input = {display: 'block'};
 
-const TextInputCLI = ({onClick}) => {
+const TextInputCLI = () => {
 	return (
 		<input    
 			className="webcli-input" 

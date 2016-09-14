@@ -19,7 +19,6 @@ class WebCLI extends React.Component {
 			output: '_'
 		};
 		this.handleShortcut = this.handleShortcut.bind(this);
-		this.handleOnClick = this.handleOnClick.bind(this);
 	}
 
 	componentDidMount() {
@@ -88,17 +87,13 @@ class WebCLI extends React.Component {
 		}
 	}
 
-	handleOnClick(e) {
-		//console.log('handleOnClick');
-	}
-
     render() {
 		const display_none = {display: 'none'};
 
 		return(
 			<div className="webcli" style={this.state.showconsole ? null : display_none}>
 				<WebCLIOutput />
-				<TextInputCLI onClick={this.handleOnClick} />
+				<TextInputCLI />
 				<WebCLIBusy message={this.state.output}
 							imageUrl={this.state.showimage ? this.state.imageUrl : null} 
 							videoUrl={this.state.showvideo ? this.state.videoUrl : null} />
