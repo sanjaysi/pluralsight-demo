@@ -7,28 +7,12 @@ class AuthButton extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			message: 'Sign In'
-		};
-
 		this.checkauth = this.checkauth.bind(this);
 	}
 
-	changeMessage() {
-		if (this.props.authenticated) {
-			this.setState({message: 'Sign Out'});
-		} else {
-			this.setState({message: 'Sign In'});
-		}
-	}
-
 	checkauth() {
-		if (this.props.authenticated) {
-			this.props.authenticate(false);
-		} else {
-			this.props.authenticate(true);
-		}
-		this.changeMessage();
+		let data = this.props.authenticated;
+		this.props.authenticate(data);
 	}
 
 	render() {
@@ -39,7 +23,7 @@ class AuthButton extends React.Component {
 
 		return ( 
 			<div className="pull-right" >
-				<button style={divStyle} type="button" onClick={this.checkauth} className="btn navbar-btn btn-primary">{this.state.message}</button>
+				<button style={divStyle} type="button" onClick={this.checkauth} className="btn navbar-btn btn-primary">{this.props.authenticated ? 'Sign Out' : 'Sign In'}</button>
 			</div>		
 		);
 	}
@@ -55,7 +39,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ authenticate: authenticate }, dispatch);
+	return bindActionCreators({ authenticate }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthButton);
