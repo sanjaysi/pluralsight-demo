@@ -17,7 +17,8 @@ export default {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './src'
+    contentBase: './src',
+    historyApiFallback: true // not in production - http://stackoverflow.com/questions/36857147/react-router-2-0-browserhistory-doesnt-work-when-refreshing/37622953
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

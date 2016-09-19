@@ -27,6 +27,10 @@ export default function(ComposedComponent) {
         router: React.PropTypes.object
     };
 
+    Authentication.propTypes = {
+        authenticated: React.PropTypes.bool
+    };
+
     function mapStateToProps(state) {
         return { authenticated: state.authenticated };
     }
