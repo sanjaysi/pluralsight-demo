@@ -19,6 +19,7 @@
     "jquery": "2.2.3",
     "js-object-pretty-print": "^0.2.0",
     "react": "15.0.2",
+    "react-bootstrap": "^0.30.3",
     "react-dom": "15.0.2",
     "react-player": "^0.9.0",
     "react-redux": "4.4.5",
