@@ -11,8 +11,14 @@ export default function configureStore(initialState) {
         window.devToolsExtension ? window.devToolsExtension() : f => f
     );
 
+    // enable logger
+    // const storeEnhancer = compose(
+    //     applyMiddleware(thunk, reduxImmutableStateInvariant(), logger),
+    //     devToolsEnhancers
+    // );
+
     const storeEnhancer = compose(
-        applyMiddleware(thunk, reduxImmutableStateInvariant(), logger),
+        applyMiddleware(thunk, reduxImmutableStateInvariant()),
         devToolsEnhancers
     );
 

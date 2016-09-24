@@ -8,7 +8,9 @@ import ManageCoursePage from './components/course/ManageCoursePage';
 import requireAuth from './components/requireAuth';
 import NotFoundPage from './components/common/NotFoundPage';
 
-const Authenticated = requireAuth((props) => props.children);
+// uncomment for authentication
+//const Authenticated = requireAuth((props) => props.children);
+const Authenticated = (props) => props.children;
 
 export default (
     <Route path="/" component={App}>
