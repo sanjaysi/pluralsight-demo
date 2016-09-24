@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
+import {Button} from 'react-bootstrap';
 import CourseList from './CourseList';
 
 class CoursesPage extends Component {
@@ -22,11 +23,15 @@ class CoursesPage extends Component {
 
         return(
             <div>
-                <h1>Courses</h1>
-                <input  type="submit"
-                        value="Add Course"
-                        className="btn btn-primary"
-                        onClick={this.redirectToAddCoursePage} />
+                <div>
+                    <h3>Courses</h3>
+                    <Button type="submit" bsStyle="primary" onClick={this.redirectToAddCoursePage}>Add Course</Button>
+                    {/* <input  type="submit"
+                             value="Add Course"
+                             className="btn btn-primary"
+                             onClick={this.redirectToAddCoursePage} />
+                    */}
+                </div>
                 <CourseList courses={courses} />
             </div>
         );
