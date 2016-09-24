@@ -9,7 +9,7 @@
 -----------------------------------------------------*/
 .webcli
 {
-    background: rgba(0, 0, 0, .7);
+    background: #042929;
     height: 300px;
     position:absolute; bottom:0; left:0; right:0;
     padding:5px;
@@ -26,7 +26,7 @@
     display:block; width:100%;
     /*background: transparent; sanjay to be removed after testing*/
     border:none;
-    color: #8AE234;
+    color: #020e40;
     margin:0; padding:0;
     outline:none; /*Chrome*/
 }
@@ -35,39 +35,17 @@
 
 /*Output text
 -----------------------------------------------------*/
-.webcli-cmd   {color:#AAA;}
+.webcli-cmd   {color:rgba(253, 253, 252, 0.74);}
 .webcli-error {color:#F00;}
 .webcli-ok    {color:#0FF;}
 
-/*Table
------------------------------------------------------*/
-.webcli-tbl                { color:#8AE234; }
-.webcli-tbl td             { padding:2px 5px; }
-.webcli-tbl td:first-child { padding-left: 0; }
 
-.webcli-lbl { color: #D3D7CF; }
-.webcli-val { color: #525753; } 
-
-/*Busy animation
------------------------------------------------------*/
 .webcli-busy
 {
-/*    width:24px; height:24px; //sanjay
-
-    border-radius: 50%;
-    border-top: 2px solid #03ade0;
-    border-right: 2px solid transparent;
-
-    margin: 4px 0;
-
-    animation: spin .6s linear infinite;*/
+    margin: 15px 0;
     color: #8AE234;
 }
 
-@keyframes spin
-{
-    to { transform: rotate(360deg); }
-}
 
 
 
