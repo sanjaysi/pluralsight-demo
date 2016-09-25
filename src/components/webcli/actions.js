@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import {pretty} from 'js-object-pretty-print';
 
 class Console {
 
 	static _cls(that) {
 		that.setState({showimage: false});
+		that.setState({showinnerhtml: false});
 		that.setState({videoUrl: false});
 		that.setState({output: ''});
 	}
@@ -28,6 +30,13 @@ class Console {
 		console.log(courses);
 		let string = pretty(courses);
 		that.setState({output: string});
+	}
+
+	static _help(that) {
+		this._cls(that);
+		that.setState({showinnerhtml: true});
+		let help = 'Hello <br/>World';
+		that.setState({output: help});
 	}
 
 	static _invalid(that) {

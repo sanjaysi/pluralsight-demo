@@ -13,9 +13,10 @@ class WebCLI extends React.Component {
 		this.state = {
 			showconsole: false,
 			showimage: false,
+			showinnerhtml: false,
 			imageUrl: null,
 			showvideo: false,
-			videoUrl: null,
+			videoUrl: '',
 			history: [],
 			cmdoffset: 0,
 			output: '_'
@@ -76,6 +77,7 @@ class WebCLI extends React.Component {
 			case 'IMG': { Console._img(this, tokens[1]); return; }
 			case 'VDO': { Console._vdo(this, tokens[1]); return; }
 			case 'CRS': { Console._crs(this, courses); return; }
+			case 'HELP': { Console._help(this); return; }
 			default: { Console._invalid(this); return; }
 		}
 	}
@@ -87,7 +89,8 @@ class WebCLI extends React.Component {
 			<div className="webcli" style={this.state.showconsole ? null : display_none}>
 				<WebCLIOutput />
 				<TextInputCLI />
-				<WebCLIBusy message={this.state.output}
+				<WebCLIBusy showinnerhtml={this.state.showinnerhtml}
+							message={this.state.output}
 							imageUrl={this.state.showimage ? this.state.imageUrl : null} 
 							videoUrl={this.state.showvideo ? this.state.videoUrl : null} />
 			</div>		
