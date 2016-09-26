@@ -4,6 +4,7 @@ import WebCLIOutput from './WebCLIOutput';
 import WebCLIBusy from './WebCLIBusy';
 import {courses} from './courseData';
 import Console from './actions';
+import Actions from './constants';
 import '../../styles/webcli.css';
 
 class WebCLI extends React.Component {
@@ -11,6 +12,8 @@ class WebCLI extends React.Component {
 		super(props);
 
 		this.state = {
+			contenttype: Actions.DEFAULT,
+			contentdata: '',
 			showconsole: false,
 			showimage: false,
 			showinnerhtml: false,
@@ -89,10 +92,8 @@ class WebCLI extends React.Component {
 			<div className="webcli" style={this.state.showconsole ? null : display_none}>
 				<WebCLIOutput />
 				<TextInputCLI />
-				<WebCLIBusy showinnerhtml={this.state.showinnerhtml}
-							message={this.state.output}
-							imageUrl={this.state.showimage ? this.state.imageUrl : null} 
-							videoUrl={this.state.showvideo ? this.state.videoUrl : null} />
+				<WebCLIBusy contenttype={this.state.contenttype}
+							contentdata={this.state.contentdata} />
 			</div>		
 		);
     }

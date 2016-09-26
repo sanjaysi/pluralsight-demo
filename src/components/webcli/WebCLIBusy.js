@@ -1,64 +1,74 @@
-/* eslint-disable no-danger */
+/* eslint-disable react/no-danger */
 import React from 'react';
 import ReactPlayer from 'react-player';
+import Actions from './constants';
 import '../../styles/webcli.css';
 
 class WebCLIBusy extends React.Component {
     
     _innerhtml() {
-		return(
-			<div  
-				dangerouslySetInnerHTML={{__html: this.props.message}} >
-			</div>
-		);
+        console.log('_innerhtml');
+        return(
+            <div  
+                dangerouslySetInnerHTML={{__html: this.props.contentdata}} >
+            </div>
+        );
     }
 
-    _innerhtml2() {
-		return(
-			<div>  
-				{this.props.message}
-			</div>
-		);
+    _message() {
+        return(
+            <div>  
+                {this.props.contentdata}
+            </div>
+        );
     }
 
     _image() {
-		return(
-			<img src={this.props.imageUrl} />
-		);
+        return(
+            <img src={this.props.contentdata} />
+        );
     }    
 
     _video() {
-		return(
-			<ReactPlayer  url={this.props.videoUrl} playing />
-		);
+        return(
+            <ReactPlayer  url={this.props.contentdata} playing />
+        );
     }    
 
     render() {
-		
-		let output = null;
-		if (this.props.showinnerhtml) {
-			output = this._innerhtml();
-		} else if (this.props.imageUrl) {
-			output = this._image();
-		} else if (this.props.videoUrl) {
-			output = this._video();
-		} else {
-			output = this._innerhtml2();
-		}
+        let output = null;
 
-		return (
-			<div className="webcli-busy" >
-				{output}
-			</div>
-		);
-	}
+        switch (this.props.contenttype) {
+
+            case (Actions.INNERHTML): {
+                output = this._innerhtml();
+                break;
+            }
+            case (Actions.IMAGE): {
+                output = this._image();
+                break;    
+            }
+            case (Actions.VIDEO): {
+                output = this._video();
+                break;    
+            }
+            default: {
+                output = this._message();
+                break;
+            }
+        }
+
+        return (
+            <div className="webcli-busy" >
+                {output}
+            </div>
+        );
+    }
 }
 
 WebCLIBusy.propTypes = {
-	message: React.PropTypes.string,
-	showinnerhtml: React.PropTypes.bool,
-	videoUrl: React.PropTypes.string,
-	imageUrl: React.PropTypes.string
+    contenttype: React.PropTypes.enum,
+    contentdata: React.PropTypes.string
 };
 
 export default WebCLIBusy;

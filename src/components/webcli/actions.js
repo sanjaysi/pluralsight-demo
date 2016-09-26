@@ -1,48 +1,48 @@
 /* eslint-disable no-console */
 
 import {pretty} from 'js-object-pretty-print';
+import Actions from './constants';
 
 class Console {
 
-	static _cls(that) {
-		that.setState({showimage: false});
-		that.setState({showinnerhtml: false});
-		that.setState({videoUrl: false});
-		that.setState({output: ''});
-	}
+    static _cls(that) {
+        that.setState({contenttype: Actions.DEFAULT});
+        that.setState({contentdata: ''});
+    }
 
-	static _echo(that, tokens) {
-		tokens.shift();
-		let str = tokens.join(' ');
-		that.setState({output: str});
-	}
+    static _echo(that, tokens) {
+        tokens.shift();
+        let str = tokens.join(' ');
+        that.setState({contentdata: str});
+    }
 
-	static _img(that, url) {
-		that.setState({showimage: true});
-		that.setState({imageUrl: url});
-	}
+    static _img(that, url) {
+        console.log('Actions: ', Actions.IMAGE);
+        that.setState({contenttype: Actions.IMAGE});
+        that.setState({contentdata: url});
+    }
 
-	static _vdo(that, url) {
-		that.setState({showvideo: true});
-		that.setState({videoUrl: url});
-	}
+    static _vdo(that, url) {
+        that.setState({contenttype: Actions.VIDEO});
+        that.setState({contentdata: url});
+    }
 
-	static _crs(that, courses) {
-		console.log(courses);
-		let string = pretty(courses);
-		that.setState({output: string});
-	}
+    static _crs(that, courses) {
+        console.log(courses);
+        let string = pretty(courses);
+        that.setState({contentdata: string});
+    }
 
-	static _help(that) {
-		this._cls(that);
-		that.setState({showinnerhtml: true});
-		let help = 'Hello <br/>World';
-		that.setState({output: help});
-	}
+    static _help(that) {
+        this._cls(that);
+        that.setState({contenttype: Actions.INNERHTML});
+        let help = 'Hello <br/>World';
+        that.setState({contentdata: help});
+    }
 
-	static _invalid(that) {
-		that.setState({output: 'Invalid command'});
-	}	
+    static _invalid(that) {
+        that.setState({contentdata: 'Invalid command'});
+    }   
 
 }
 
