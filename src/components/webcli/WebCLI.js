@@ -15,14 +15,8 @@ class WebCLI extends React.Component {
 			contenttype: Actions.DEFAULT,
 			contentdata: '',
 			showconsole: false,
-			showimage: false,
-			showinnerhtml: false,
-			imageUrl: null,
-			showvideo: false,
-			videoUrl: '',
 			history: [],
-			cmdoffset: 0,
-			output: '_'
+			cmdoffset: 0
 		};
 		this.handleShortcut = this.handleShortcut.bind(this);
 	}

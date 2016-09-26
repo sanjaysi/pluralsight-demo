@@ -17,7 +17,6 @@ class Console {
     }
 
     static _img(that, url) {
-        console.log('Actions: ', Actions.IMAGE);
         that.setState({contenttype: Actions.IMAGE});
         that.setState({contentdata: url});
     }
@@ -28,7 +27,6 @@ class Console {
     }
 
     static _crs(that, courses) {
-        console.log(courses);
         let string = pretty(courses);
         that.setState({contentdata: string});
     }

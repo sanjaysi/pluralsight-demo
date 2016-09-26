@@ -7,7 +7,6 @@ import '../../styles/webcli.css';
 class WebCLIBusy extends React.Component {
     
     _innerhtml() {
-        console.log('_innerhtml');
         return(
             <div  
                 dangerouslySetInnerHTML={{__html: this.props.contentdata}} >
