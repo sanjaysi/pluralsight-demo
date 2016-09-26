@@ -73,7 +73,7 @@ class WebCLI extends React.Component {
 			case 'CLS': { Console._cls(this); return; }
 			case 'IMG': { Console._img(this, tokens[1]); return; }
 			case 'VDO': { Console._vdo(this, tokens[1]); return; }
-			case 'CRS': { Console._crs(this, courses); return; }
+			case 'GETJ': { Console._getj(this, courses); return; }
 			case 'HELP': { Console._help(this); return; }
 			default: { Console._invalid(this); return; }
 		}

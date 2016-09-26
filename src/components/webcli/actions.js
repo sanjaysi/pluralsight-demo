@@ -4,10 +4,11 @@ import {pretty} from 'js-object-pretty-print';
 import ContentType from './constants';
 
 const commands = [
+    {'ECHO': 'Echo string'}, 
     {'CLS': 'Clear console'}, 
     {'IMG': 'Show image'}, 
     {'VDO': 'Watch video'}, 
-    {'CRS': 'Show course data'}, 
+    {'GETJ': 'Get Json data'}, 
     {'HELP': 'Help menu'} 
 ];
 
@@ -33,9 +34,10 @@ class Console {
                         contentdata: url });
     }
 
-    static _crs(that, courses) {
+    static _getj(that, courses) {
         let string = pretty(courses);
-        that.setState({contentdata: string});
+        that.setState({ contenttype: ContentType.GETJ,
+                        contentdata: string });
     }
 
     static _help(that) {

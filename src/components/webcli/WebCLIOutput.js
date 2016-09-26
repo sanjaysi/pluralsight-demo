@@ -22,6 +22,14 @@ class WebCLIOutput extends React.Component {
         );
     }
 
+    _getj() {
+        return(
+            <pre>
+                  {this.props.contentdata}
+            </pre>
+        );
+    }
+
     _image() {
         return(
             <img src={this.props.contentdata} />
@@ -51,6 +59,10 @@ class WebCLIOutput extends React.Component {
                 output = this._video();
                 break;    
             }
+            case (Actions.GETJ): {
+                output = this._getj();
+                break;    
+            }
             default: {
                 output = this._message();
                 break;
@@ -66,7 +78,7 @@ class WebCLIOutput extends React.Component {
 }
 
 WebCLIOutput.propTypes = {
-    contenttype: React.PropTypes.enum,
+    contenttype: React.PropTypes.number,
     contentdata: React.PropTypes.string
 };
 
