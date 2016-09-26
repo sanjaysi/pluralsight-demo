@@ -12,17 +12,22 @@ class ManageCoursePage extends React.Component {
 		this.state = {
 			course: Object.assign({}, this.props.course),
 			errors: {},
-			saving: false
+			saving: false,
+			deleting: false
 		};
 		toastr.options.timeOut = 1000;
 		this.updateCourseState = this.updateCourseState.bind(this);
 		this.saveCourse = this.saveCourse.bind(this);
+		this.deleteCourse = this.deleteCourse.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (this.props.course.id != nextProps.course.id) {
-			this.setState({course: Object.assign({}, nextProps.course)});
-		}
+		// once deleted the course becomes undefined
+		if (nextProps.course != undefined) {
+			if (this.props.course.id != nextProps.course.id) {
+				this.setState({course: Object.assign({}, nextProps.course)});
+			}
+		}	
 	}
 
 	updateCourseState(e) {
@@ -49,6 +54,23 @@ class ManageCoursePage extends React.Component {
 		this.context.router.push('/courses');	
 	}
 
+	deleteCourse(e) {
+		e.preventDefault();
+		this.setState({deleting: true});
+		this.props.actions.deleteCourse(this.state.course)
+			.then(() => this.redirectAfterDelete())
+			.catch(error => {
+				toastr.error(error);
+				this.setState({deleting: false});
+			});
+	}
+
+	redirectAfterDelete() {
+		this.setState({deleting: false});
+		toastr.success('Course deleted');
+		this.context.router.push('/courses');	
+	}
+
 	render() {
 		return (
 			<CourseForm 
@@ -57,13 +79,15 @@ class ManageCoursePage extends React.Component {
 				onSave={this.saveCourse}
 				course={this.state.course} 
 				errors={this.state.errors} 
-				saving={this.state.saving}/>
+				saving={this.state.saving}
+				onDelete={this.deleteCourse}
+				deleting={this.state.deleting}/>
 		);
 	}
 }
 
 ManageCoursePage.propTypes = {
-	course: PropTypes.object.isRequired,
+	course: PropTypes.object,
 	authors: PropTypes.array.isRequired,
 	actions: PropTypes.object.isRequired
 };

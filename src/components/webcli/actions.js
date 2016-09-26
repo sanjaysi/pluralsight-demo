@@ -2,6 +2,7 @@
 
 import {pretty} from 'js-object-pretty-print';
 import ContentType from './constants';
+import {courses} from './courseData';
 
 const commands = [
     {'ECHO': 'Echo string'}, 
@@ -34,10 +35,10 @@ class Console {
                         contentdata: url });
     }
 
-    static _getj(that, courses) {
-        let string = pretty(courses);
+    static _getj(that) {
+        let data = pretty(courses);
         that.setState({ contenttype: ContentType.GETJ,
-                        contentdata: string });
+                        contentdata: data });
     }
 
     static _help(that) {

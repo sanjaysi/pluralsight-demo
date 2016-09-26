@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import TextInputCLI from  './TextInputCLI';
 import WebCLIHeader from './WebCLIHeader';
 import WebCLIOutput from './WebCLIOutput';
-import {courses} from './courseData';
 import Console from './actions';
 import ContentType from './constants';
 import '../../styles/webcli.css';
@@ -30,7 +29,7 @@ class WebCLI extends React.Component {
 			let newState = this.state.history.slice();
 			newState.push(e.target.value);
 			this.setState({history: newState});
-			this.runCmd(e.target.value.trim());
+			this.runCmd(e.target.value);
 			e.target.value = "";
 		} else if (e.keyCode == 38) {
 			let cmdoffset = this.state.cmdoffset;
@@ -63,7 +62,7 @@ class WebCLI extends React.Component {
 	runCmd(command) {
 		Console._cls(this);
 
-		if (command == "") {return;}
+		if (command == undefined || command.trim().length == 0) {return;}
 
 		let tokens = command.split(" ");
 		let	cmd = tokens[0].toUpperCase();
@@ -73,7 +72,7 @@ class WebCLI extends React.Component {
 			case 'CLS': { Console._cls(this); return; }
 			case 'IMG': { Console._img(this, tokens[1]); return; }
 			case 'VDO': { Console._vdo(this, tokens[1]); return; }
-			case 'GETJ': { Console._getj(this, courses); return; }
+			case 'GETJ': { Console._getj(this); return; }
 			case 'HELP': { Console._help(this); return; }
 			default: { Console._invalid(this); return; }
 		}
