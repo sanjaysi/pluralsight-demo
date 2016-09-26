@@ -1,26 +1,54 @@
+/* eslint-disable no-danger */
 import React from 'react';
 import ReactPlayer from 'react-player';
 import '../../styles/webcli.css';
 
 class WebCLIBusy extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+    
+    _innerhtml() {
+		return(
+			<div  
+				dangerouslySetInnerHTML={{__html: this.props.message}} >
+			</div>
+		);
+    }
+
+    _innerhtml2() {
+		return(
+			<div>  
+				{this.props.message}
+			</div>
+		);
+    }
+
+    _image() {
+		return(
+			<img src={this.props.imageUrl} />
+		);
+    }    
+
+    _video() {
+		return(
+			<ReactPlayer  url={this.props.videoUrl} playing />
+		);
+    }    
 
     render() {
-		const style_video = this.props.showvideo ? {display: 'none'} : {display: 'block'};
-		const style_innerhtml = this.props.showinnerhtml ? {display: 'block'} : {display: 'none'};
-		const style_output = this.props.showinnerhtml ? {display: 'none'} : {display: 'block'};
+		
+		let output = null;
+		if (this.props.showinnerhtml) {
+			output = this._innerhtml();
+		} else if (this.props.imageUrl) {
+			output = this._image();
+		} else if (this.props.videoUrl) {
+			output = this._video();
+		} else {
+			output = this._innerhtml2();
+		}
 
 		return (
-			<div className="webcli-busy" style={style_video}>
-				<div style={style_innerhtml} 
-					dangerouslySetInnerHTML={{__html: this.props.message}} >
-				</div>
-				
-				<div style={style_output}>{this.props.message}</div>
-				<img src={this.props.imageUrl} />
-				<ReactPlayer  url={this.props.videoUrl} playing />
+			<div className="webcli-busy" >
+				{output}
 			</div>
 		);
 	}

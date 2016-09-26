@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+
 import {pretty} from 'js-object-pretty-print';
 
 class Console {
