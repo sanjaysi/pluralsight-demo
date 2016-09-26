@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react';
 import TextInputCLI from  './TextInputCLI';
+import WebCLIHeader from './WebCLIHeader';
 import WebCLIOutput from './WebCLIOutput';
-import WebCLIBusy from './WebCLIBusy';
 import {courses} from './courseData';
 import Console from './actions';
-import Actions from './constants';
+import ContentType from './constants';
 import '../../styles/webcli.css';
 
 class WebCLI extends React.Component {
@@ -12,7 +12,7 @@ class WebCLI extends React.Component {
 		super(props);
 
 		this.state = {
-			contenttype: Actions.DEFAULT,
+			contenttype: ContentType.DEFAULT,
 			contentdata: '',
 			showconsole: false,
 			history: [],
@@ -84,10 +84,10 @@ class WebCLI extends React.Component {
 
 		return(
 			<div className="webcli" style={this.state.showconsole ? null : display_none}>
-				<WebCLIOutput />
+				<WebCLIHeader />
 				<TextInputCLI />
-				<WebCLIBusy contenttype={this.state.contenttype}
-							contentdata={this.state.contentdata} />
+				<WebCLIOutput contenttype={this.state.contenttype}
+							  contentdata={this.state.contentdata} />
 			</div>		
 		);
     }

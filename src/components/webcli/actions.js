@@ -1,13 +1,20 @@
 /* eslint-disable no-console */
 
 import {pretty} from 'js-object-pretty-print';
-import Actions from './constants';
+import ContentType from './constants';
+
+const commands = [
+    {'CLS': 'Clear console'}, 
+    {'IMG': 'Show image'}, 
+    {'VDO': 'Watch video'}, 
+    {'CRS': 'Show course data'}, 
+    {'HELP': 'Help menu'} 
+];
 
 class Console {
-
     static _cls(that) {
-        that.setState({contenttype: Actions.DEFAULT});
-        that.setState({contentdata: ''});
+        that.setState({ contenttype: ContentType.DEFAULT,
+                        contentdata: '' });
     }
 
     static _echo(that, tokens) {
@@ -17,13 +24,13 @@ class Console {
     }
 
     static _img(that, url) {
-        that.setState({contenttype: Actions.IMAGE});
-        that.setState({contentdata: url});
+        that.setState({ contenttype: ContentType.IMAGE,
+                        contentdata: url });
     }
 
     static _vdo(that, url) {
-        that.setState({contenttype: Actions.VIDEO});
-        that.setState({contentdata: url});
+        that.setState({ contenttype: ContentType.VIDEO,
+                        contentdata: url });
     }
 
     static _crs(that, courses) {
@@ -32,10 +39,14 @@ class Console {
     }
 
     static _help(that) {
-        this._cls(that);
-        that.setState({contenttype: Actions.INNERHTML});
-        let help = 'Hello <br/>World';
-        that.setState({contentdata: help});
+        let help='';
+        commands.forEach(function (item){
+            for(let k in item){
+                help += k + ' - ' + item[k] + '<br/>';
+            }
+        });
+        that.setState({ contenttype: ContentType.INNERHTML, 
+                        contentdata: help});
     }
 
     static _invalid(that) {

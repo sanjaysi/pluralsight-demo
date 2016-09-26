@@ -1,6 +1,6 @@
 /*Font
 -----------------------------------------------------*/
-.webcli, .webcli-input, .webcli-output
+.webcli, .webcli-input
 {
     font:20px/20px 'Lucida Console', 'Consolas', 'Courier New' !important;
 }
@@ -24,7 +24,6 @@
 .webcli-input
 {
     display:block; width:100%;
-    /*background: transparent; sanjay to be removed after testing*/
     border:none;
     color: #020e40;
     margin:0; padding:0;
@@ -40,7 +39,7 @@
 .webcli-ok    {color:#0FF;}
 
 
-.webcli-busy
+.webcli-output
 {
     margin: 15px 0;
     color: #8AE234;
