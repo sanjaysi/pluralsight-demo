@@ -70,7 +70,7 @@ class WebCLIOutput extends React.Component {
         }
 
         return (
-            <div className="webcli-output" >
+            <div className="webcli-output">
                 {output}
             </div>
         );

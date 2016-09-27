@@ -85,8 +85,8 @@ class WebCLI extends React.Component {
 			<div className="webcli" style={this.state.showconsole ? null : display_none}>
 				<WebCLIHeader />
 				<TextInputCLI />
-				<WebCLIOutput contenttype={this.state.contenttype}
-							  contentdata={this.state.contentdata} />
+				<WebCLIOutput	contenttype={this.state.contenttype}
+								contentdata={this.state.contentdata} />
 			</div>		
 		);
     }

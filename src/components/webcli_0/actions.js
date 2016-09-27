@@ -25,7 +25,6 @@ class Console {
 	}
 
 	static _crs(that, courses) {
-		console.log(courses);
 		let string = pretty(courses);
 		that.setState({output: string});
 	}
