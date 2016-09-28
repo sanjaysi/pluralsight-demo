@@ -4,13 +4,14 @@ import {pretty} from 'js-object-pretty-print';
 import ContentType from './constants';
 import {courses} from './courseData';
 import axios from 'axios';
+import validUrl from 'valid-url';
 
 const commands = [
-    {'ECHO': 'Echo string'}, 
+    {'ECHO [string...]': 'Echo string'}, 
     {'CLS': 'Clear console'}, 
-    {'IMG': 'Show image'}, 
-    {'VDO': 'Watch video'}, 
-    {'GETJ': 'Get Json data'}, 
+    {'IMG [url]': 'Show image'}, 
+    {'VDO [url]': 'Watch video'}, 
+    {'GETJ [url]': 'Get Json data'}, 
     {'HELP': 'Help menu'} 
 ];
 
@@ -26,29 +27,35 @@ class Console {
         that.setState({contentdata: str});
     }
 
-    static _img(that, url) {
-        that.setState({ contenttype: ContentType.IMAGE,
-                        contentdata: url });
+    static _validurl(url) {
+        if (validUrl.isUri(url)) {
+            return true;
+        }
+    }
+
+    static _img(that, url='') {
+        if (this._validurl(url)) {
+            that.setState({ contenttype: ContentType.IMAGE,
+                            contentdata: url });
+        } else {this._invalid(that);}
     }
 
     static _vdo(that, url) {
-        that.setState({ contenttype: ContentType.VIDEO,
-                        contentdata: url });
+        if (this._validurl(url)) {
+            that.setState({ contenttype: ContentType.VIDEO,
+                            contentdata: url });
+        } else {this._invalid(that);}
     }
 
-    // static _getj(that) {
-    //     let data = pretty(courses);
-    //     that.setState({ contenttype: ContentType.GETJ,
-    //                     contentdata: data });
-    // }
-
-    static _getj(that) {
-        axios.get('http://localhost:4000/db')
-          .then(function(response){
-            let data = pretty(response.data);
-            that.setState({ contenttype: ContentType.GETJ,
-                            contentdata: data });
-        });
+    static _getj(that, url) {
+        if (this._validurl(url)) {
+            axios.get(url)
+              .then(function(response){
+                let data = pretty(response.data);
+                that.setState({ contenttype: ContentType.GETJ,
+                                contentdata: data });
+            });
+        } else {this._invalid(that);}
     }
 
     static _help(that) {
