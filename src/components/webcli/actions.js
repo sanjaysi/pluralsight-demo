@@ -3,6 +3,7 @@
 import {pretty} from 'js-object-pretty-print';
 import ContentType from './constants';
 import {courses} from './courseData';
+import axios from 'axios';
 
 const commands = [
     {'ECHO': 'Echo string'}, 
@@ -35,10 +36,19 @@ class Console {
                         contentdata: url });
     }
 
+    // static _getj(that) {
+    //     let data = pretty(courses);
+    //     that.setState({ contenttype: ContentType.GETJ,
+    //                     contentdata: data });
+    // }
+
     static _getj(that) {
-        let data = pretty(courses);
-        that.setState({ contenttype: ContentType.GETJ,
-                        contentdata: data });
+        axios.get('http://localhost:4000/db')
+          .then(function(response){
+            let data = pretty(response.data);
+            that.setState({ contenttype: ContentType.GETJ,
+                            contentdata: data });
+        }); 
     }
 
     static _help(that) {
