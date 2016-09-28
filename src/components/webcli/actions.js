@@ -43,12 +43,21 @@ class Console {
     // }
 
     static _getj(that) {
+        // synchronous call
+        let response = axios.get('http://localhost:4000/db');
+        let data = pretty(response.data);
+        that.setState({ contenttype: ContentType.GETJ,
+                        contentdata: data });
+        
+        // asynchronous call
+        /*
         axios.get('http://localhost:4000/db')
           .then(function(response){
             let data = pretty(response.data);
             that.setState({ contenttype: ContentType.GETJ,
                             contentdata: data });
-        }); 
+        });
+        */ 
     }
 
     static _help(that) {
