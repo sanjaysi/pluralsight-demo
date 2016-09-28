@@ -19,13 +19,16 @@ export default function courseReducer(state = initialState.courses, action) {
             ];
 
         case types.DELETE_COURSE_SUCCESS: {
-            let newState = [];
-            for (let courseidx in state) {
-                if (state[courseidx].id != action.course.id) {
-                    newState.push(state[courseidx]);
-                }
-            }
+            let newState = state.filter(course => { 
+				return course.id != action.course.id;
+			});
             return newState;
+            // for (let courseidx in state) {
+            //     if (state[courseidx].id != action.course.id) {
+            //         newState.push(state[courseidx]);
+            //     }
+            // }
+            // return newState;
         }
 
         default:
