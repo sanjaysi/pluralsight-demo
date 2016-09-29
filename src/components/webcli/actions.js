@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import {pretty} from 'js-object-pretty-print';
 import ContentType from './constants';
 import {courses} from './courseData';

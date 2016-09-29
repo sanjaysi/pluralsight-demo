@@ -23,12 +23,6 @@ export default function courseReducer(state = initialState.courses, action) {
 				return course.id != action.course.id;
 			});
             return newState;
-            // for (let courseidx in state) {
-            //     if (state[courseidx].id != action.course.id) {
-            //         newState.push(state[courseidx]);
-            //     }
-            // }
-            // return newState;
         }
 
         default:
