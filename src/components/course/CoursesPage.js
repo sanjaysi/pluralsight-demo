@@ -4,10 +4,17 @@ import {browserHistory} from 'react-router';
 import {Button} from 'react-bootstrap';
 import CourseList from './CourseList';
 
+import {loadCourses} from '../../actions/courseActions';
+
 class CoursesPage extends Component {
     constructor(props) {
         super(props);
         this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
+    }
+
+    componentWillMount(){
+        // always get the latest courses
+        this.props.dispatch(loadCourses());
     }
 
     courseRow(course, index) {
@@ -40,6 +47,10 @@ class CoursesPage extends Component {
 
 CoursesPage.propTypes = {
     courses: PropTypes.array.isRequired
+};
+
+CoursesPage.contextTypes = {
+    store: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
