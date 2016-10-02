@@ -3,7 +3,7 @@ const ContentType = {
     IMAGE: 1,
     VIDEO: 2,
     INNERHTML: 3,
-    GETJ: 4
+    JSON: 4
 };
 
 export default ContentType;

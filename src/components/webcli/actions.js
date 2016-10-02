@@ -1,8 +1,8 @@
 import {pretty} from 'js-object-pretty-print';
 import ContentType from './constants';
-import {courses} from './courseData';
 import axios from 'axios';
 import validUrl from 'valid-url';
+import config from '../../actions/serviceConfig';
 
 const commands = [
     {'ECHO [string...]': 'Echo string'}, 
@@ -10,6 +10,7 @@ const commands = [
     {'IMG [url]': 'Show image'}, 
     {'VDO [url]': 'Watch video'}, 
     {'GETJ [url]': 'Get Json data'}, 
+    {'DELETE [url]': 'Delete data'}, 
     {'HELP': 'Help menu'} 
 ];
 
@@ -27,6 +28,12 @@ class Console {
 
     static _validurl(url) {
         if (validUrl.isUri(url)) {
+            return true;
+        }
+    }
+
+    static _validstr(str) {
+        if (str != undefined && str.length > 0) {
             return true;
         }
     }
@@ -50,8 +57,27 @@ class Console {
             axios.get(url)
               .then(function(response){
                 let data = pretty(response.data);
-                that.setState({ contenttype: ContentType.GETJ,
+                that.setState({ contenttype: ContentType.JSON,
                                 contentdata: data });
+            })
+            .catch(function(response) {
+                that.setState({ contenttype: ContentType.DEFAULT,
+                                contentdata: response.message });
+            });
+        } else {this._invalid(that);}
+    }
+
+    static _delete(that, id) {
+        if (this._validstr(id)) {
+            axios.delete(`${config.host}/courses/${id}`)
+              .then((response) => {
+                that.setState({ contenttype: ContentType.DEFAULT,
+                                contentdata: `Successfully deleted: ${id} 
+                                            Response: ${response.status}` });
+            })
+            .catch(function(response) {
+                that.setState({ contenttype: ContentType.DEFAULT,
+                                contentdata: response.message });
             });
         } else {this._invalid(that);}
     }

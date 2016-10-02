@@ -7,13 +7,14 @@ import CourseList from './CourseList';
 import {loadCourses} from '../../actions/courseActions';
 
 class CoursesPage extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
     }
 
     componentWillMount(){
-        // always get the latest courses
+        // get the latest courses each time it is routed
+        // to this page
         this.props.dispatch(loadCourses());
     }
 
@@ -46,11 +47,12 @@ class CoursesPage extends Component {
 } 
 
 CoursesPage.propTypes = {
-    courses: PropTypes.array.isRequired
+    courses: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired
 };
 
 CoursesPage.contextTypes = {
-    store: PropTypes.object.isRequired
+    router: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

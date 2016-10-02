@@ -59,7 +59,7 @@ class WebCLIOutput extends React.Component {
                 output = this._video();
                 break;    
             }
-            case (Actions.GETJ): {
+            case (Actions.JSON): {
                 output = this._getj();
                 break;    
             }
