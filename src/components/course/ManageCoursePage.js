@@ -16,9 +16,11 @@ class ManageCoursePage extends React.Component {
 			deleting: false
 		};
 		toastr.options.timeOut = 1000;
+		toastr.options.positionClass = "toast-top-center";
 		this.updateCourseState = this.updateCourseState.bind(this);
 		this.saveCourse = this.saveCourse.bind(this);
 		this.deleteCourse = this.deleteCourse.bind(this);
+		this.redirectAfterCancel = this.redirectAfterCancel.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -39,13 +41,28 @@ class ManageCoursePage extends React.Component {
 
 	saveCourse(e) {
 		e.preventDefault();
-		this.setState({saving: true});
-		this.props.actions.saveCourse(this.state.course)
-			.then(() => this.redirect())
-			.catch(error => {
-				toastr.error(error);
-				this.setState({saving: false});
-			});
+		if (this.isDataValid()) {
+			this.setState({saving: true});
+			this.props.actions.saveCourse(this.state.course)
+				.then(() => this.redirect())
+				.catch(error => {
+					toastr.error(error);
+					this.setState({saving: false});
+				});
+		}
+	}
+
+	isDataValid() {
+		let {title, authorId, category, length} = this.state.course;
+		if (title.length < 3 ||
+			authorId.length < 3 ||
+			category.length < 3 ||
+			length.length < 1) {
+			toastr.options.timeOut = 2000;
+			toastr.warning('Please enter valid data');
+			return false;
+		}
+		return true;
 	}
 
 	redirect() {
@@ -71,6 +88,10 @@ class ManageCoursePage extends React.Component {
 		this.context.router.push('/courses');	
 	}
 
+	redirectAfterCancel() {
+		this.context.router.push('/courses');	
+	}
+
 	render() {
 		return (
 			<CourseForm 
@@ -81,6 +102,7 @@ class ManageCoursePage extends React.Component {
 				errors={this.state.errors} 
 				saving={this.state.saving}
 				onDelete={this.deleteCourse}
+				onCancel={this.redirectAfterCancel}
 				deleting={this.state.deleting}/>
 		);
 	}

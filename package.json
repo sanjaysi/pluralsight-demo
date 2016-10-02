@@ -10,7 +10,7 @@
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
-    "jsonserver": "json-server --watch ./json-server/courses.json --port 4000"   
+    "jsonserver": "json-server --watch ./json-server/courses.json --port 4000"
   },
   "author": "Sanjay Singh (credit Cory)",
   "license": "MIT",
@@ -23,6 +23,7 @@
     "js-object-pretty-print": "^0.2.0",
     "react": "15.0.2",
     "react-bootstrap": "^0.30.3",
+    "react-bootstrap-modal": "^3.0.0",
     "react-dom": "15.0.2",
     "react-escape-html": "^1.0.5",
     "react-player": "^0.9.0",

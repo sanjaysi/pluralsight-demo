@@ -38,7 +38,13 @@ class WebCLIOutput extends React.Component {
 
     _video() {
         return(
-            <ReactPlayer  url={this.props.contentdata} playing />
+            <ReactPlayer  url={this.props.contentdata} playing controls />
+        );
+    }    
+
+    _audio() {
+        return(
+            <ReactPlayer  url={this.props.contentdata} playing controls height="60" />
         );
     }    
 
@@ -57,6 +63,10 @@ class WebCLIOutput extends React.Component {
             }
             case (Actions.VIDEO): {
                 output = this._video();
+                break;    
+            }
+            case (Actions.AUDIO): {
+                output = this._audio();
                 break;    
             }
             case (Actions.JSON): {
@@ -78,7 +88,7 @@ class WebCLIOutput extends React.Component {
 }
 
 WebCLIOutput.propTypes = {
-    contenttype: React.PropTypes.number,
+    contenttype: React.PropTypes.string,
     contentdata: React.PropTypes.string
 };
 

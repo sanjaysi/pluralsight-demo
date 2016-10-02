@@ -32,14 +32,14 @@ class CoursesPage extends Component {
         return(
             <div>
                 <div>
-                    <h3>Courses</h3>
+                <h4><span   type="submit" 
+                            className="btn btn-success" 
+                            onClick={this.redirectToAddCoursePage}>Add Course</span></h4>
+                    {/* 
                     <Button type="submit" bsStyle="primary" onClick={this.redirectToAddCoursePage}>Add Course</Button>
-                    {/* <input  type="submit"
-                             value="Add Course"
-                             className="btn btn-primary"
-                             onClick={this.redirectToAddCoursePage} />
                     */}
                 </div>
+                <br/>
                 <CourseList courses={courses} />
             </div>
         );

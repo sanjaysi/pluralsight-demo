@@ -8,9 +8,11 @@ const commands = [
     {'ECHO [string...]': 'Echo string'}, 
     {'CLS': 'Clear console'}, 
     {'IMG [url]': 'Show image'}, 
-    {'VDO [url]': 'Watch video'}, 
+    {'VIDEO [url]': 'Watch video'}, 
+    {'AUDIO [url]': 'Play audio'}, 
+    {'GET [id]': 'Get data'}, 
+    {'DELETE [id]': 'Delete data'}, 
     {'GETJ [url]': 'Get Json data'}, 
-    {'DELETE [url]': 'Delete data'}, 
     {'HELP': 'Help menu'} 
 ];
 
@@ -45,9 +47,16 @@ class Console {
         } else {this._invalid(that);}
     }
 
-    static _vdo(that, url) {
+    static _video(that, url) {
         if (this._validurl(url)) {
             that.setState({ contenttype: ContentType.VIDEO,
+                            contentdata: url });
+        } else {this._invalid(that);}
+    }
+
+    static _audio(that, url) {
+        if (this._validurl(url)) {
+            that.setState({ contenttype: ContentType.AUDIO,
                             contentdata: url });
         } else {this._invalid(that);}
     }
@@ -67,6 +76,20 @@ class Console {
         } else {this._invalid(that);}
     }
 
+    static _get(that, param = '') {
+            let url = `${config.host}/courses/${param}`;
+            axios.get(url)
+              .then(function(response){
+                let data = pretty(response.data);
+                that.setState({ contenttype: ContentType.JSON,
+                                contentdata: data });
+            })
+            .catch(function(response) {
+                that.setState({ contenttype: ContentType.DEFAULT,
+                                contentdata: `Data not found (${response.message})` });
+            });
+    }
+
     static _delete(that, id) {
         if (this._validstr(id)) {
             axios.delete(`${config.host}/courses/${id}`)
@@ -77,7 +100,7 @@ class Console {
             })
             .catch(function(response) {
                 that.setState({ contenttype: ContentType.DEFAULT,
-                                contentdata: response.message });
+                                contentdata: `Error (${response.message})` });
             });
         } else {this._invalid(that);}
     }

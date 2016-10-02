@@ -71,7 +71,9 @@ class WebCLI extends React.Component {
 			case 'ECHO': { Console._echo(this, tokens); return; }
 			case 'CLS': { Console._cls(this); return; }
 			case 'IMG': { Console._img(this, tokens[1]); return; }
-			case 'VDO': { Console._vdo(this, tokens[1]); return; }
+			case 'VIDEO': { Console._video(this, tokens[1]); return; }
+			case 'AUDIO': { Console._audio(this, tokens[1]); return; }
+			case 'GET': { Console._get(this, tokens[1]); return; }
 			case 'GETJ': { Console._getj(this, tokens[1]); return; }
 			case 'DELETE': { Console._delete(this, tokens[1]); return; }
 			case 'HELP': { Console._help(this); return; }
