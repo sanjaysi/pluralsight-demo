@@ -3,13 +3,17 @@ import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {Button} from 'react-bootstrap';
 import CourseList from './CourseList';
-
 import {loadCourses} from '../../actions/courseActions';
+import ModalBox from '../common/VideoPlayer';
 
 class CoursesPage extends Component {
     constructor(props, context) {
         super(props, context);
+        this.state = {
+            showmodal: false
+        };
         this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
+        this.openModalBox = this.openModalBox.bind(this);
     }
 
     componentWillMount(){
@@ -26,11 +30,23 @@ class CoursesPage extends Component {
         browserHistory.push('/course');
     }
 
+    openModalBox(e) {
+        let newstate = !this.state.showmodal;
+        this.setState({showmodal: newstate});
+        console.log(e.target);
+    }
+
     render() {
         const {courses} = this.props;
 
         return(
             <div>
+               {/*<ModalBox showmodal={this.state.showmodal} />
+                <div     input type="button" 
+                            className="btn btn-link" 
+                            data="http://www.com"
+                            onClick={this.openModalBox}>Open modal</div>
+                */}
                 <div>
                 <h4><span   type="submit" 
                             className="btn btn-success" 

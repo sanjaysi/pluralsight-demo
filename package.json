@@ -26,6 +26,8 @@
     "react-bootstrap-modal": "^3.0.0",
     "react-dom": "15.0.2",
     "react-escape-html": "^1.0.5",
+    "react-modal": "^1.4.0",
+    "react-modal-dialog": "^3.0.2",
     "react-player": "^0.9.0",
     "react-redux": "4.4.5",
     "react-router": "2.4.0",
